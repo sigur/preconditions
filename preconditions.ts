@@ -79,7 +79,6 @@ class Formatter {
     //todo(sigur) in Guava library all the "not expression parameters" are appended to the end
     public format(template: string): string {
         return template.replace(this.expression, (pattern: string) => {
-            console.log(pattern);
             return this.parameters.get(pattern) || pattern;
         });
 
