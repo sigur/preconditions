@@ -20,3 +20,10 @@ export class NullPointerException extends Exception {
 
     }
 }
+
+export class IndexOutOfBoundsException extends Exception {
+    constructor(message: string = '') {
+        super('IndexOutOfBoundsException', message);
+
+    }
+}

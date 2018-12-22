@@ -1,6 +1,15 @@
-import {IllegalArgumentException, IllegalStateException, NullPointerException} from "./exceptions";
+import {
+    IllegalArgumentException,
+    IllegalStateException,
+    IndexOutOfBoundsException,
+    NullPointerException
+} from "./exceptions";
 
 export class Preconditions {
+    private constructor() {
+        // Static class type
+    }
+
     public static checkArgument(expression: boolean, message: string = '', placeholders: Placecholders = ['']): void {
         if (!expression) {
             const template = new Formatter(placeholders);
@@ -24,9 +33,27 @@ export class Preconditions {
         return object;
     }
 
-    //todo(sigur) implement method
-    public static checkElementIndex(index: number, limit: number, message?: string): number {
+    public static checkElementIndex(index: number, limit: number, message: string = '', placeholders: Placecholders = ['']): number {
+        if (index < 0 || index >= limit) {
+            const template = new Formatter(placeholders);
+            throw new IndexOutOfBoundsException(template.format(message));
+        }
         return index;
+    }
+
+    public static checkPositionIndex(index: number, limit: number, message: string = '', placeholders: Placecholders = ['']): number {
+        if (index < 0 || index > limit) {
+            const template = new Formatter(placeholders);
+            throw new IndexOutOfBoundsException(template.format(message));
+        }
+        return index;
+    }
+
+    public static checkPositionIndexes(start: number, end: number, limit: number, message: string = '', placeholders: Placecholders = ['']): void {
+        if (start < 0 || end < start || end > limit) {
+            const template = new Formatter(placeholders);
+            throw new IndexOutOfBoundsException(template.format(message));
+        }
     }
 }
 
@@ -47,14 +74,13 @@ class Formatter {
         }
 
         this.expression = new RegExp(keys.join('|'), "gi");
-        console.log(this.expression);
     }
 
     //todo(sigur) in Guava library all the "not expression parameters" are appended to the end
     public format(template: string): string {
         return template.replace(this.expression, (pattern: string) => {
             console.log(pattern);
-            return this.parameters.get(pattern) || pattern ;
+            return this.parameters.get(pattern) || pattern;
         });
 
     }

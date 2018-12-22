@@ -9,6 +9,5 @@
   "author": "Massimo 'sigur' Canonaco",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^10.12.15"
   }
 }
