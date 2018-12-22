@@ -1,0 +1,14 @@
+{
+  "name": "preconditons",
+  "version": "1.0.0",
+  "description": "TypeScript version of the Guava Preconditions library",
+  "main": "preconditions",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Massimo 'sigur' Canonaco",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^10.12.15"
+  }
+}
