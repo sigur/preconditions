@@ -73,7 +73,7 @@ class Formatter {
             keys.push(`\\$\\{${key}\\}`);
         }
 
-        this.expression = new RegExp(keys.join('|'), "gi");
+        this.expression = new RegExp(keys.join('|'), "g");
     }
 
     //todo(sigur) in Guava library all the "not expression parameters" are appended to the end
