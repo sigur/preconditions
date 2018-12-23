@@ -1,29 +1,21 @@
-//todo(sigur) refactor for factory methods
-class Exception {
-    constructor(public name: string, public message: string = ''){}
-}
-export class IllegalArgumentException extends Exception {
-    constructor(message: string = '') {
-        super('IllegalArgumentException', message);
+export class Exception {
+    private constructor(public readonly name: string, public readonly message: string){
     }
-};
 
-export class IllegalStateException extends Exception {
-    constructor(message: string = '') {
-        super('IllegalStateException', message);
+    public static IllegalArgumentException(description: string) : Exception {
+        return new Exception('IllegalArgumentException', description);
     }
-}
 
-export class NullPointerException extends Exception {
-    constructor(message: string = '') {
-        super('NullPointerException', message);
-
+    public static IllegalStateException(description: string) : Exception {
+        return new Exception('IllegalStateException', description);
     }
-}
 
-export class IndexOutOfBoundsException extends Exception {
-    constructor(message: string = '') {
-        super('IndexOutOfBoundsException', message);
-
+    public static NullPointerException(description: string) : Exception {
+        return new Exception('NullPointerException', description);
     }
+
+    public static IndexOutOfBoundsException(description: string) : Exception {
+        return new Exception('IndexOutOfBoundsException', description);
+    }
+
 }

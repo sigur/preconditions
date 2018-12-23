@@ -1,8 +1,5 @@
 import {
-    IllegalArgumentException,
-    IllegalStateException,
-    IndexOutOfBoundsException,
-    NullPointerException
+    Exception
 } from "./exceptions";
 
 export class Preconditions {
@@ -12,22 +9,19 @@ export class Preconditions {
 
     public static checkArgument(expression: boolean, message: string = '', placeholders: Placecholders = ['']): void {
         if (!expression) {
-            const template = new Formatter(placeholders);
-            throw new IllegalArgumentException(template.format(message));
+            throw this.createException(Exception.IllegalArgumentException, message, placeholders);
         }
     }
 
     public static checkState(expression: boolean, message: string = '', placeholders: Placecholders = ['']): void {
         if (!expression) {
-            const template = new Formatter(placeholders);
-            throw new IllegalStateException(template.format(message));
+            throw this.createException(Exception.IllegalStateException, message, placeholders);
         }
     }
 
     public static checkNotNull<T>(object: T, message: string = '', placeholders: Placecholders = ['']): T {
         if (object === undefined || object == null) {
-            const template = new Formatter(placeholders);
-            throw new NullPointerException(template.format(message));
+            throw this.createException(Exception.NullPointerException, message, placeholders);
         }
 
         return object;
@@ -35,31 +29,32 @@ export class Preconditions {
 
     public static checkElementIndex(index: number, limit: number, message: string = '', placeholders: Placecholders = ['']): number {
         if (index < 0 || index >= limit) {
-            const template = new Formatter(placeholders);
-            throw new IndexOutOfBoundsException(template.format(message));
+            throw this.createException(Exception.IndexOutOfBoundsException, message, placeholders);
         }
         return index;
     }
 
     public static checkPositionIndex(index: number, limit: number, message: string = '', placeholders: Placecholders = ['']): number {
         if (index < 0 || index > limit) {
-            const template = new Formatter(placeholders);
-            throw new IndexOutOfBoundsException(template.format(message));
+            throw this.createException(Exception.IndexOutOfBoundsException, message, placeholders);
         }
         return index;
     }
 
     public static checkPositionIndexes(start: number, end: number, limit: number, message: string = '', placeholders: Placecholders = ['']): void {
         if (start < 0 || end < start || end > limit) {
-            const template = new Formatter(placeholders);
-            throw new IndexOutOfBoundsException(template.format(message));
+            throw this.createException(Exception.IndexOutOfBoundsException, message, placeholders);
         }
+    }
+
+    private static createException(error: (message: string) => Exception, message: string, placeholders: Placecholders) : Exception {
+        const template = new Formatter(placeholders);
+        return error(template.format(message));
     }
 }
 
 
 type Placecholders = [string] | { [property: string]: string; };
-
 class Formatter {
     private parameters: Map<string, string>;
     private expression: RegExp;
