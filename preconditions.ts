@@ -20,7 +20,7 @@ export class Preconditions {
     }
 
     public static checkNotNull<T>(object: T, message: string = '', placeholders: Placecholders = ['']): T {
-        if (object === undefined || object == null) {
+        if (object === undefined || object === null) {
             throw this.createException(Exception.NullPointerException, message, placeholders);
         }
 
