@@ -54,7 +54,7 @@ export class Preconditions {
 }
 
 
-type Placecholders = [string] | { [property: string]: string; };
+type Placecholders = [any] | { [property: string]: any; };
 class Formatter {
     private parameters: Map<string, string>;
     private expression: RegExp;
@@ -64,7 +64,7 @@ class Formatter {
         let keys = new Array<string>();
         for (let key in values) {
             // @ts-ignore
-            this.parameters.set(`\$\{${key}\}`, values[key]); //todo(sigur) resolve TS7017
+            this.parameters.set(`\$\{${key}\}`, values[key].toString()); //todo(sigur) resolve TS7017
             keys.push(`\\$\\{${key}\\}`);
         }
 
