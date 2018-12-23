@@ -19,7 +19,7 @@ are used (double quotes or single quote). Reason is for efficiency, because it's
 Placeholder keys/positions and placeholder values are required for this version. 
 
 ### Examples
-**Without error messages*
+**Without error message**
 ```javascript
 Preconditions.checkArgument(two < 1);
 ```
