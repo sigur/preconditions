@@ -4,10 +4,12 @@
   "description": "TypeScript version of the Guava Preconditions library",
   "main": "preconditions",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "Massimo 'sigur' Canonaco",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine": "^3.3.1"
   }
 }
