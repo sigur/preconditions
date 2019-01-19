@@ -1,7 +1,18 @@
 const Preconditions = require('../../preconditions').Preconditions
 
 describe("Check Argument", function () {
-    let zero = 0, one = 1;
+    const zero = 0, one = 1;
+
+    it("Valid parameter", function() {
+        try {
+            Preconditions.checkArgument(one > zero);
+            Preconditions.checkArgument(one > zero, "This message should not appear beacuse ${0}", ["precondition is satisfied"]);
+            Preconditions.checkArgument(one > zero, "This message should not appear beacuse ${reason}", {reason: "precondition is satisfied"});
+        } catch (error) {
+            fail(`Unexpected error is raised: ${error}`);
+        }
+    });
+
     it("No custom message", function () {
         try {
             Preconditions.checkArgument(zero > one);
