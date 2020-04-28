@@ -9,7 +9,7 @@ See [the Guava official wiki](https://github.com/google/guava/wiki/Preconditions
 The scope of this library is to provide static method utilities to improve readability of code, and to help the calling 
 method to collaborate with its caller if it has made an invalid request.
 
-For every method the idea is to provide the possibility of thown an exception:
+For every method the idea is to provide the possibility of throwing an exception:
 1. Without error messages;
 1. With a static error message string;
 1. With a dynamic string for the message. 
